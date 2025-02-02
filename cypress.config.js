@@ -9,6 +9,5 @@ module.exports = defineConfig({
     supportFile: 'cypress/support/e2e.js',
   },
   env: {
-    // Les variables d'environnement seront définies ailleurs
   }
 })
