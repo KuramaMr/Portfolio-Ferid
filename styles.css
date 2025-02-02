@@ -160,8 +160,8 @@ body, html {
   object-fit: scale-down;
   border: 3px solid var(--gold);
   margin-bottom: 1rem;
-  border-radius: 10px;
-  box-shadow: gold 0px 10px 20px, gold 0px 6px 6px;
+  border-radius: 70px 10px 70px 10px;
+  box-shadow: gold 0px 5px 5px, gold 0px 6px 6px;
 }
 
 #hero .hero-content p {
@@ -1090,108 +1090,36 @@ nav ul li a {
   }
 }
 
+#typed-text-container {
+    width: 100%;
+    text-align: center;
+    padding: 0 20px;
+    box-sizing: border-box;
+}
+
 #typed-text {
-  margin-top: 50px;
-  font-size: 1.5rem;
-  font-weight: 300;
-  color: white;
-  border-right: 2px solid var(--gold);
-  white-space: nowrap;
-  overflow: hidden;
-  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+    margin: 50px auto 0;
+    font-size: 1.5rem;
+    font-weight: 300;
+    color: white;
+    display: inline-block;
+    white-space: normal;
+    max-width: 90%;
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+.letter {
+    display: inline-block;
+    opacity: 0;
+    animation: fadeInLetter 0.5s forwards;
 }
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  50% { border-color: var(--white) }
-}
-
-@keyframes buttonTransition {
+@keyframes fadeInLetter {
     0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.1);
-        color: #ffd700;
+        opacity: 0;
+        transform: translateY(5px);
     }
     100% {
-        transform: scale(1);
-    }
-}
-
-#admin-btn {
-    cursor: pointer;
-    color: #fff;
-    text-decoration: none;
-    transition: color 0.3s ease;
-    position: relative;
-    display: inline-block;
-}
-
-#admin-btn.animating {
-    animation: buttonTransition 1s ease-in-out;
-}
-
-#admin-btn:hover {
-    color: #ffd700;
-}
-
-/* Style quand l'utilisateur est connecté */
-#admin-btn.logged-in {
-    color: #ff6b6b;
-}
-
-#admin-btn.logged-in:hover {
-    color: #ff4444;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
         opacity: 1;
+        transform: translateY(0);
     }
-}
-
-@keyframes slideOut {
-    from {
-        transform: translateX(0);
-        opacity: 1;
-    }
-    to {
-        transform: translateX(100%);
-        opacity: 0;
-    }
-}
-
-.notification {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 15px 25px;
-    border-radius: 5px;
-    color: #fff;
-    z-index: 1000;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    animation: slideIn 0.5s ease-out forwards;
-}
-
-.notification.success {
-    background-color: #4CAF50;
-}
-
-.notification.error {
-    background-color: #f44336;
-}
-
-.notification.sliding-out {
-    animation: slideOut 0.5s ease-in forwards;
 }

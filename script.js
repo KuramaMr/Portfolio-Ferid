@@ -272,74 +272,67 @@ document.addEventListener('DOMContentLoaded', function() {
 
     loadImages();
 
-    // Animation de texte tapé
-    const text = "Expert en formation CACES";
-    const typedTextElement = document.getElementById('typed-text');
-    let i = 0;
+    // Initialisation AOS
+    AOS.init({
+        duration: 2000,
+        once: true,
+        offset: 300
+    });
 
-    function typeWriter() {
-        if (i < text.length) {
-            typedTextElement.innerHTML += text.charAt(i);
-            i++;
-            setTimeout(typeWriter, 100);
+    // Réinitialise la position de défilement
+    window.scrollTo(0, 0);
+
+    // Animation du texte d'accueil
+    function initTypewriter() {
+        const text = document.getElementById('typed-text');
+        if (!text) return;
+        
+        const string = text.textContent;
+        text.innerHTML = '';
+        
+        function addLetter(index) {
+            if (index < string.length) {
+                const letter = document.createElement('span');
+                letter.className = 'letter';
+                letter.textContent = string[index];
+                text.appendChild(letter);
+                setTimeout(() => addLetter(index + 1), 50);
+            }
         }
+        
+        setTimeout(() => addLetter(0), 500);
     }
 
-    typeWriter();
-});
-
-// Formulaire de contact
-const contactForm = document.getElementById('contact-form');
-const messageInput = document.getElementById('message');
-const charCount = document.getElementById('char-count');
-const messageError = document.getElementById('message-error');
-
-const BACKEND_URL = '/.netlify/functions';
-const MIN_CHARS = 50;
-
-messageInput.addEventListener('input', function() {
-    const remainingChars = MIN_CHARS - this.value.length;
-    charCount.textContent = `(${this.value.length}/${MIN_CHARS} caractères minimum)`;
+    // Gestion du menu mobile
+    const menuToggle = document.getElementById('menu-toggle');
+    const mainNav = document.getElementById('main-nav');
     
-    if (remainingChars > 0) {
-        messageError.style.display = 'block';
-        messageError.textContent = `Il manque ${remainingChars} caractère${remainingChars > 1 ? 's' : ''}.`;
-    } else {
-        messageError.style.display = 'none';
-    }
-});
+    menuToggle?.addEventListener('click', () => {
+        mainNav.classList.toggle('show');
+        menuToggle.classList.toggle('active');
+    });
 
-contactForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
+    // Gestion du formulaire de contact
+    const contactForm = document.getElementById('contact-form');
+    const messageInput = document.getElementById('message');
+    const charCount = document.getElementById('char-count');
+    const messageError = document.getElementById('message-error');
+    const MIN_CHARS = 50;
 
-    if (messageInput.value.length < MIN_CHARS) {
-        messageError.style.display = 'block';
-        return;
-    }
-
-    const formData = new FormData(e.target);
-    const formProps = Object.fromEntries(formData);
-
-    try {
-        const response = await fetch(`${BACKEND_URL}/submit-form`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formProps),
-        });
-
-        if (response.ok) {
-            showNotification('Message envoyé avec succès !');
-            e.target.reset();
-            charCount.textContent = `(0/${MIN_CHARS} caractères minimum)`;
+    messageInput?.addEventListener('input', function() {
+        const remainingChars = MIN_CHARS - this.value.length;
+        charCount.textContent = `(${this.value.length}/${MIN_CHARS} caractères minimum)`;
+        
+        if (remainingChars > 0) {
+            messageError.style.display = 'block';
+            messageError.textContent = `Il manque ${remainingChars} caractère${remainingChars > 1 ? 's' : ''}.`;
         } else {
-            showNotification('Erreur lors de l\'envoi du message. Veuillez réessayer.', 'error');
+            messageError.style.display = 'none';
         }
-    } catch (error) {
-        console.error('Erreur:', error);
-        showNotification('Une erreur est survenue. Veuillez réessayer plus tard.', 'error');
-    }
+    });
+
+    // Démarrer l'animation du texte
+    initTypewriter();
 });
 
 function showNotification(message, type = 'success') {
@@ -362,44 +355,13 @@ function showNotification(message, type = 'success') {
     }, 3000);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menu-toggle');
-    const mainNav = document.getElementById('main-nav');
-
-    menuToggle.addEventListener('click', function() {
-        this.classList.toggle('active');
-        mainNav.classList.toggle('show');
-    });
-
-    // Fermer le menu lorsqu'un lien est cliqué
-    const navLinks = mainNav.querySelectorAll('a');
-    navLinks.forEach(link => {
+document.addEventListener('DOMContentLoaded', () => {
+    // Fermer le menu quand on clique sur un lien
+    document.querySelectorAll('nav a').forEach(link => {
         link.addEventListener('click', () => {
             mainNav.classList.remove('show');
         });
     });
-
-    // Fermer le menu lorsqu'on clique en dehors
-    document.addEventListener('click', function(event) {
-        const isClickInsideNav = mainNav.contains(event.target);
-        const isClickOnToggle = menuToggle.contains(event.target);
-        
-        if (!isClickInsideNav && !isClickOnToggle && mainNav.classList.contains('show')) {
-            mainNav.classList.remove('show');
-        }
-    });
 });
-
-// Ajout des animations AOS
-document.addEventListener('DOMContentLoaded', function() {
-    AOS.init({
-        duration: 2000,
-        once: true,
-        offset: 300
-    });
-
-    // Réinitialise la position de défilement
-    window.scrollTo(0, 0);
-}, 100); // Délai de 100ms
 
 
