@@ -1,0 +1,179 @@
+/* print.css */
+
+/* Réinitialisation et styles de base */
+* {
+    background: transparent !important;
+    color: #000 !important;
+    box-shadow: none !important;
+    text-shadow: none !important;
+}
+
+body {
+    font-family: 'Georgia', serif;
+    line-height: 1.5;
+    font-size: 12pt;
+    margin: 0;
+    padding: 20mm;
+}
+
+/* Styles pour la page de titre */
+@page :first {
+    margin-top: 0;
+}
+
+body::before {
+    content: "Portfolio de Guelmoui Ferid";
+    display: block;
+    text-align: center;
+    font-size: 35pt;
+    font-weight: normal;
+    margin-top: 3cm;
+    margin-bottom: 0.5cm;
+}
+
+h1:first-of-type {
+    text-align: center;
+    font-size: 36pt;
+    border: none;
+    margin-top: 0;
+    padding-bottom: 2cm;
+}
+
+#hero .hero-content img {
+    display: block;
+    margin: 0 auto 2cm auto;
+    max-width: 50% !important;
+    height: auto;
+    border-radius: 5%;
+    object-fit: cover;
+}
+
+#hero .hero-content p {
+    text-align: center;
+    font-size: 16pt;
+    font-style: italic;
+}
+
+/* En-tête de page */
+@page {
+    margin: 2cm;
+}
+
+/* Titres */
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Arial', sans-serif;
+    page-break-after: avoid;
+    margin-top: 1cm;
+}
+
+h1 {
+    display: none;
+}
+
+h2 {
+    font-size: 18pt;
+    color: #333 !important;
+}
+
+/* Liens */
+a {
+    color: #000 !important;
+    text-decoration: none;
+    word-wrap: break-word;
+}
+
+a[href^="http"]:after {
+    content: " (" attr(href) ")";
+    font-size: 10pt;
+    font-style: italic;
+}
+
+/* Images */
+img {
+    max-width: 100% !important;
+    page-break-inside: avoid;
+    margin: 1cm 0;
+}
+
+/* Sections spécifiques */
+#presentation, #formations, #partenaires {
+    page-break-before: always;
+    margin-top: 1cm;
+}
+
+#presentation .content-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#presentation .image-container {
+    order: -1;
+    margin-bottom: 1cm;
+    text-align: center;
+}
+
+#formations ul {
+    padding-left: 5mm;
+    list-style-type: square;
+}
+
+#partenaires .partenaires-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1cm;
+    justify-items: center;
+}
+
+/* Éléments à cacher */
+header nav, 
+#hero .scroll-indicator, 
+#galerie, 
+#image-management, 
+#contact, 
+#login-modal, 
+footer,
+button,
+.custom-file-upload {
+    display: none !important;
+}
+
+/* Styles pour les tableaux (si vous en avez) */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1cm 0;
+}
+
+th, td {
+    border: 1pt solid #ddd;
+    padding: 8pt;
+    text-align: left;
+}
+
+/* Pagination */
+@page {
+    @bottom-right {
+        content: counter(page);
+    }
+}
+
+/* Styles pour les citations (si vous en avez) */
+blockquote {
+    border-left: 3pt solid #ccc;
+    padding-left: 1cm;
+    margin-left: 0;
+    font-style: italic;
+}
+
+/* Ajustements pour le responsive */
+@media print and (max-width: 580px) {
+    body {
+        font-size: 10pt;
+    }
+    h1 {
+        font-size: 18pt;
+    }
+    h2 {
+        font-size: 14pt;
+    }
+}

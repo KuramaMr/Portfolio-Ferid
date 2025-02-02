@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio de Guelmaoui Ferid - Formateur CACES</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="print.css" media="print">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+    <script>
+        window.BACKEND_URL = '{{ BACKEND_URL }}';
+    </script>
+</head>
+<body class="loading">
+    <header>
+        <div id="notification-container"></div>
+        <h1><a href="#" id="top-link">Guelmaoui Ferid</a></h1>
+        <button id="menu-toggle" aria-label="Toggle menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav id="main-nav">
+            <ul>
+                <li><a href="#presentation">PRÉSENTATION</a></li>
+                <li><a href="#formations">FORMATIONS</a></li>
+                <li><a href="#galerie">GALERIE</a></li>
+                <li><a href="#contact">CONTACT</a></li>
+                <li><a href="#partenaires">PARTENAIRES</a></li>
+                <li><a href="#" id="image-management-link" style="display: none;">Gestion Images</a></li>
+                <li><button id="logout-button" class="logout-btn" style="display: none;">Déconnexion</button></li>
+                <li><a href="#" id="admin-btn">ADMIN</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="hero" data-aos="fade-up">
+            <div class="hero-content">
+                <img src="images/CarteFerid.png" alt="Guelmaoui Ferid" class="hero-image">
+                
+            </div>
+            <div>
+                <p id="typed-text"></p>
+            </div>
+            <div class="scroll-indicator">
+                <a href="#presentation" class="smooth-scroll">Découvrez mes services</a>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <section id="presentation" data-aos="fade-up">
+            <h2>Présentation</h2>
+            <div class="content-wrapper">
+                <div class="text-content">
+                    <p> Depuis maintenant 25 ans, j'exerce dans le domaine qui me passionne depuis toujours, la logistique. 
+                        De la logistique industrielle à l'aéronautique, en passant par les transports publics urbains et le BTP, j'ai acquis des connaissances parfaites et une forte expérience dans ce domaine mais surtout grâce à des méthodes,
+                        des pratiques et des techniques apprises, j'ai développé une pédagogie évidente pour moi, qui a été de transmettre mon savoir. 
+                        C'est pourquoi aujourd'hui je suis formateur. En 2022, Je me suis donc perfectionné en passant mon titre professionnel FPA et c'est en novembre de cette même année que je suis devenu auto entrepreneur, 
+                        Formateur Professionnel. </p> <br>
+
+                    <p> Depuis 2022, j'ai eu l'opportunité de travailler pour plusieurs centres de formations, agences d'intérim et entreprises privées, 
+                        ce qui m'a permis de mettre en pratique mon savoir-faire. Je me suis appuyé sur des méthodes et des pratiques adaptées, 
+                        afin de développer chez les apprenants les compétences nécessaires pour réussir à travers mes différents programmes de formation pour lesquels j'ai été sollicités. 
+                        Aujourd'hui, formateur reconnu dans ma région, je souhaite élargir mon réseau professionnel et proposer mes services à travers la France mais surtout dans votre région. 
+                        Je suis certain que collaborer ensemble, nous mènera à développer de belles choses.</p>
+                </div>
+                <div class="image-container">
+                    <img src="images/ferid.jpg" alt="Guelmaoui Ferid" class="hero-image bordered-image">
+                </div>
+            </div>
+        </section>
+
+        <section id="formations" data-aos="fade-up">
+            <h2>Formations proposées</h2>
+            <ul>
+                <li>CACES R485 - Chariots de manutention automoteurs gerbeurs à conducteur accompagnant</li>
+                <li>CACES R489 - Chariots de manutention automoteurs à conducteur porté</li>
+                <li>CACES R486 A - Plates-formes élévatrices mobiles de personnel</li>
+            </ul>
+        </section>
+
+        <section id="galerie" data-aos="fade-up">
+            <h2>Galerie</h2>
+            <div id="gallery-container">
+                <!-- Les images seront ajoutées ici dynamiquement -->
+            </div>
+        </section>
+
+        <div id="image-management" style="display: none;">
+        <h2>Gestion des images</h2>
+        <div id="admin-panel">
+            <h3>Ajouter une nouvelle image</h3>
+            <form id="upload-form">
+                <div class="file-input-wrapper">
+                    <input type="file" id="image-upload" name="image" accept="image/*" required>
+                    <label for="image-upload" class="custom-file-upload">Choisir un fichier</label>
+                </div>
+                <input type="text" id="image-description" name="description" placeholder="Description de l'image">
+                <button type="submit">Uploader</button>
+            </form>
+        </div>
+            <div id="image-list"></div>
+        </div>
+
+        <section id="contact" data-aos="fade-up">
+            <h2>Contactez-moi</h2>
+            <form id="contact-form">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+        
+                <label for="email">Email :</label>
+                <input type="email" id="email" name="email" required>
+        
+                <label for="message">Message : <span id="char-count">(0/50 caractères minimum)</span></label>
+                <textarea id="message" name="message" required minlength="50"></textarea>
+                <p id="message-error" class="error-message" style="display: none; color: red;">Le message doit contenir au moins 50 caractères.</p>
+        
+                <button type="submit">Envoyer</button>
+            </form>
+        </section>
+    </main>
+
+    <section id="partenaires" data-aos="fade-up">
+        <h2>Nos Partenaires</h2>
+        <div class="partenaires-grid">
+            <div class="partenaire"><img src="images/AfpaTransparent.png" alt="Partenaire 1"></div>
+            <div class="partenaire"><img src="images/Almea.png" alt="Partenaire 2"></div>
+            <div class="partenaire"><img src="images/COF.png" alt="Partenaire 3"></div>
+            <div class="partenaire"><img src="images/goformation.png" alt="Partenaire 4"></div>
+            <div class="partenaire"><img src="images/manpower.png" alt="Partenaire 5"></div>
+            <div class="partenaire"><img src="images/partenaireformation.png" alt="Partenaire 6"></div>
+            <div class="partenaire"><img src="images/partnaire.png" alt="Partenaire 7"></div>
+            <div class="partenaire"><img src="images/xpo.png" alt="Partenaire 8"></div>
+        </div>
+    </section>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Connexion Administrateur</h2>
+            <form id="login-form" class="login-form">
+                <h3>Connexion Admin</h3>
+                <input type="email" id="admin-email" placeholder="Email" required>
+                <input type="password" id="admin-password" placeholder="Mot de passe" required>
+                <button type="submit">Se connecter</button>
+            </form>
+            <button id="logout-btn" style="display: none;">Déconnexion</button>
+        </div>
+    </div>
+
+    
+
+    <footer>
+        <p>&copy; 2024 Guelmaoui Ferid - Tous droits réservés</p>
+    </footer>   
+    <script src="config.js"></script>
+    <script type="module">
+        import { loginAdmin, logoutAdmin, loadGallery } from './main.js';
+        window.loginAdmin = loginAdmin;
+        window.logoutAdmin = logoutAdmin;
+        window.loadGallery = loadGallery;
+    </script>
+    <script>
+        AOS.init();
+    </script>
+    <script type="module" src="firebase.config.js"></script>
+    <script type="module" src="main.js"></script>
+</body>
+
+</html>
