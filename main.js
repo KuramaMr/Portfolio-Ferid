@@ -75,8 +75,8 @@ function displayImages(images) {
             <p>${image.description}</p>
             ${auth.currentUser ? `
                 <div class="admin-controls">
-                    <button class="edit-btn">Modifier</button>
-                    <button class="delete-btn">Supprimer</button>
+                    <button class="edit-btn"></button>
+                    <button class="delete-btn"></button>
                 </div>
             ` : ''}
         `;
