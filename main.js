@@ -4,25 +4,19 @@ import {
     signOut 
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-auth.js';
 import { 
-    collection, 
-    addDoc, 
-    deleteDoc, 
-    updateDoc, 
-    getDocs, 
-    doc 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
-import { 
-    ref, 
-    uploadBytes, 
-    getDownloadURL, 
-    deleteObject 
-} from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js';
-import { uploadImage, deleteImage } from './storage.js';
+    uploadImage, 
+    uploadVideo, 
+    deleteImage, 
+    deleteVideo 
+} from './storage.js';
 import { 
     addImageMetadata, 
-    getImagesWithMetadata, 
+    addVideoMetadata,
+    getImagesWithMetadata,
+    getVideosWithMetadata,
     deleteImageMetadata,
-    updateImageDescription 
+    deleteVideoMetadata,
+    updateMediaDescription
 } from './database.js';
 
 // Au début du fichier, après les imports
@@ -50,38 +44,50 @@ document.addEventListener('DOMContentLoaded', () => {
     console.log('Page chargée'); // Pour déboguer
 });
 
-// Chargement de la galerie
+// Fonction pour charger tous les médias
 async function loadGallery() {
     try {
-        const images = await getImagesWithMetadata();
-        displayImages(images);
+        const [images, videos] = await Promise.all([
+            getImagesWithMetadata(),
+            getVideosWithMetadata()
+        ]);
+        
+        displayMedia([...images, ...videos]);
     } catch (error) {
-        showNotification('Erreur de chargement de la galerie', 'error');
+        console.error('Erreur chargement galerie:', error);
+        showNotification('Erreur lors du chargement de la galerie', 'error');
     }
 }
 
-// Affichage des images
-function displayImages(images) {
+// Fonction pour afficher les médias
+function displayMedia(mediaItems) {
     const galleryContainer = document.getElementById('gallery-container');
     galleryContainer.innerHTML = '';
 
-    images.forEach(image => {
-        const item = document.createElement('div');
-        item.className = 'gallery-item';
-        item.dataset.id = image.id;
+    mediaItems.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
-        item.innerHTML = `
-            <img src="${image.url}" alt="${image.description}">
-            <p>${image.description}</p>
+    mediaItems.forEach(item => {
+        const mediaElement = document.createElement('div');
+        mediaElement.className = 'gallery-item';
+        mediaElement.dataset.id = item.id;
+        mediaElement.dataset.type = item.type; // Utiliser le type des métadonnées
+
+        const content = item.type === 'video'
+            ? `<video src="${item.url}" controls preload="metadata"></video>`
+            : `<img src="${item.url}" alt="${item.description}">`;
+
+        mediaElement.innerHTML = `
+            ${content}
+            <p>${item.description}</p>
             ${auth.currentUser ? `
                 <div class="admin-controls">
-                    <button class="edit-btn"></button>
-                    <button class="delete-btn"></button>
+                    <button class="edit-btn" title="Modifier"></button>
+                    <button class="delete-btn" title="Supprimer"></button>
                 </div>
             ` : ''}
         `;
 
-        galleryContainer.appendChild(item);
+        galleryContainer.appendChild(mediaElement);
     });
 }
 
@@ -182,87 +188,130 @@ function setupEventListeners() {
 
     // Gestion du formulaire d'upload
     const uploadForm = document.getElementById('upload-form');
-    const fileInput = document.getElementById('image-upload');
-    const fileLabel = document.querySelector('.custom-file-upload');
-    const fileNameDisplay = document.createElement('div');
-    fileNameDisplay.className = 'file-name';
-    fileLabel.after(fileNameDisplay);
-
-    fileInput?.addEventListener('change', (e) => {
-        const file = e.target.files[0];
-        if (file) {
-            fileNameDisplay.textContent = file.name;
-            fileNameDisplay.style.display = 'block';
-        } else {
-            fileNameDisplay.textContent = '';
-            fileNameDisplay.style.display = 'none';
-        }
-    });
-
+    const fileInput = document.getElementById('media-upload');
+    const mediaType = document.getElementById('media-type');
+    const fileNameDisplay = document.getElementById('selected-file-name');
+    
     uploadForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const file = fileInput.files[0];
-        const description = document.getElementById('image-description').value;
+        const type = mediaType.value;
+        const description = document.getElementById('media-description').value;
 
         try {
-            const imageUrl = await uploadImage(file);
-            await addImageMetadata(imageUrl, description);
+            let mediaUrl;
+            if (type === 'video') {
+                mediaUrl = await uploadVideo(file);
+                await addVideoMetadata(mediaUrl, description);
+            } else {
+                mediaUrl = await uploadImage(file);
+                await addImageMetadata(mediaUrl, description);
+            }
+
             loadGallery();
-            showNotification('Image ajoutée avec succès');
-            
-            // Réinitialiser le formulaire et l'affichage du nom de fichier
             uploadForm.reset();
-            fileNameDisplay.textContent = '';
-            fileNameDisplay.style.display = 'none';
-            
+            showNotification(`${type === 'video' ? 'Vidéo' : 'Image'} ajoutée avec succès`);
         } catch (error) {
-            showNotification('Erreur lors de l\'ajout de l\'image', 'error');
+            console.error('Erreur:', error);
+            showNotification(`Erreur lors de l'ajout: ${error.message}`, 'error');
         }
+    });
+
+    fileInput.addEventListener('change', (e) => {
+        const fileName = e.target.files[0]?.name;
+        fileNameDisplay.textContent = fileName ? `Fichier sélectionné : ${fileName}` : '';
     });
 
     // Gestion des clics sur la galerie (édition et suppression)
     document.getElementById('gallery-container').addEventListener('click', async (e) => {
         if (!auth.currentUser) return;
 
-        const galleryItem = e.target.closest('.gallery-item');
-        if (!galleryItem) return;
+        const mediaElement = e.target.closest('.gallery-item');
+        if (!mediaElement) return;
 
         if (e.target.classList.contains('edit-btn')) {
-            handleEdit(galleryItem);
+            handleEdit(mediaElement);
         } else if (e.target.classList.contains('delete-btn')) {
-            handleDelete(galleryItem);
+            handleDelete(mediaElement);
         }
     });
 }
 
 // Gestion de l'édition
-async function handleEdit(galleryItem) {
-    const imageId = galleryItem.dataset.id;
-    const currentDescription = galleryItem.querySelector('p').textContent;
+async function handleEdit(mediaElement) {
+    const id = mediaElement.dataset.id;
+    const type = mediaElement.dataset.type;
+    const currentDescription = mediaElement.querySelector('p').textContent;
     const newDescription = prompt('Nouvelle description:', currentDescription);
 
     if (newDescription && newDescription !== currentDescription) {
         try {
-            await updateImageDescription(imageId, newDescription);
+            await updateMediaDescription(id, newDescription, type);
             loadGallery();
+            showNotification('Description mise à jour avec succès');
         } catch (error) {
+            console.error('Erreur modification:', error);
             showNotification('Erreur lors de la modification', 'error');
         }
     }
 }
 
 // Gestion de la suppression
-async function handleDelete(galleryItem) {
-    if (!confirm('Êtes-vous sûr de vouloir supprimer cette image ?')) return;
+async function handleDelete(mediaElement) {
+    if (!confirm('Êtes-vous sûr de vouloir supprimer ce média ?')) return;
 
     try {
-        const imageId = galleryItem.dataset.id;
-        const imageUrl = galleryItem.querySelector('img').src;
-        await deleteImage(imageUrl);
-        await deleteImageMetadata(imageId);
-        loadGallery();
+        const id = mediaElement.dataset.id;
+        const isVideo = mediaElement.dataset.type === 'video';
+        
+        // Extraire l'URL complète du média
+        const mediaUrl = isVideo 
+            ? mediaElement.querySelector('video').src 
+            : mediaElement.querySelector('img').src;
+            
+        // Extraire le chemin relatif de l'URL complète
+        const fullPath = decodeURIComponent(mediaUrl.split('/o/')[1].split('?')[0]);
+        
+        console.log('Type:', isVideo ? 'video' : 'image');
+        console.log('URL complète:', mediaUrl);
+        console.log('Chemin relatif:', fullPath);
+
+        // 1. D'abord supprimer de la base de données
+        try {
+            if (isVideo) {
+                await deleteVideoMetadata(id);
+            } else {
+                await deleteImageMetadata(id);
+            }
+        } catch (error) {
+            console.error('Erreur suppression métadonnées:', error);
+            throw error;
+        }
+
+        // 2. Ensuite supprimer du storage
+        try {
+            if (isVideo) {
+                await deleteVideo(fullPath);
+            } else {
+                await deleteImage(fullPath);
+            }
+        } catch (error) {
+            console.error('Erreur suppression fichier:', error);
+            throw error;
+        }
+
+        // 3. Supprimer l'élément du DOM immédiatement
+        mediaElement.remove();
+        
+        // 4. Recharger la galerie pour s'assurer que tout est à jour
+        await loadGallery();
+        
+        showNotification(`${isVideo ? 'Vidéo' : 'Image'} supprimée avec succès`);
     } catch (error) {
-        showNotification('Erreur lors de la suppression', 'error');
+        console.error('Erreur lors de la suppression:', error);
+        showNotification('Erreur lors de la suppression: ' + error.message, 'error');
+        // En cas d'erreur, recharger la galerie pour s'assurer de l'état correct
+        await loadGallery();
     }
 }
 

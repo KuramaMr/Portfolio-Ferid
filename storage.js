@@ -4,22 +4,18 @@ import {
     ref, 
     uploadBytes, 
     getDownloadURL, 
-    deleteObject,
-    listAll
+    deleteObject
 } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-storage.js';
 
 // Upload d'une image
 export async function uploadImage(file) {
     try {
-        const storageRef = ref(storage, `gallery/${Date.now()}_${file.name}`);
+        const storageRef = ref(storage, `images/${Date.now()}_${file.name}`);
         const snapshot = await uploadBytes(storageRef, file);
         const downloadURL = await getDownloadURL(snapshot.ref);
-        
-        showNotification('Image uploadée avec succès');
         return downloadURL;
     } catch (error) {
         console.error('Erreur upload:', error);
-        showNotification('Erreur lors de l\'upload: ' + error.message, 'error');
         throw error;
     }
 }
@@ -29,25 +25,32 @@ export async function deleteImage(imageUrl) {
     try {
         const imageRef = ref(storage, imageUrl);
         await deleteObject(imageRef);
-        showNotification('Image supprimée avec succès');
     } catch (error) {
         console.error('Erreur suppression:', error);
-        showNotification('Erreur lors de la suppression: ' + error.message, 'error');
         throw error;
     }
 }
 
-// Récupération de toutes les images
-async function getAllImages() {
+// Upload d'une vidéo
+export async function uploadVideo(file) {
     try {
-        const listRef = ref(storage, 'gallery');
-        const res = await listAll(listRef);
-        const urls = await Promise.all(
-            res.items.map(itemRef => getDownloadURL(itemRef))
-        );
-        return urls;
+        const storageRef = ref(storage, `videos/${Date.now()}_${file.name}`);
+        const snapshot = await uploadBytes(storageRef, file);
+        const downloadURL = await getDownloadURL(snapshot.ref);
+        return downloadURL;
     } catch (error) {
-        console.error('Erreur récupération:', error);
+        console.error('Erreur upload vidéo:', error);
+        throw error;
+    }
+}
+
+// Suppression d'une vidéo
+export async function deleteVideo(videoUrl) {
+    try {
+        const videoRef = ref(storage, videoUrl);
+        await deleteObject(videoRef);
+    } catch (error) {
+        console.error('Erreur suppression vidéo:', error);
         throw error;
     }
 }

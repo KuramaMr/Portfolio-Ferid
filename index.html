@@ -205,10 +205,15 @@
             <h3>Ajouter une nouvelle image</h3>
             <form id="upload-form">
                 <div class="file-input-wrapper">
-                    <input type="file" id="image-upload" name="image" accept="image/*" required>
-                    <label for="image-upload" class="custom-file-upload">Choisir un fichier</label>
+                    <input type="file" id="media-upload" name="media" accept="image/*,video/*" required>
+                    <label for="media-upload" class="custom-file-upload">Choisir un fichier (image ou vidéo)</label>
+                    <div id="selected-file-name"></div>
                 </div>
-                <input type="text" id="image-description" name="description" placeholder="Description de l'image">
+                <select id="media-type" name="mediaType">
+                    <option value="image">Image</option>
+                    <option value="video">Vidéo</option>
+                </select>
+                <input type="text" id="media-description" name="description" placeholder="Description du média">
                 <button type="submit">Uploader</button>
             </form>
         </div>
