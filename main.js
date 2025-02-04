@@ -42,6 +42,52 @@ document.addEventListener('DOMContentLoaded', () => {
     setupEventListeners();
     setupContactForm();
     console.log('Page chargée'); // Pour déboguer
+
+    const heroImage = document.querySelector('.hero-image');
+    const heroContent = document.querySelector('.hero-content');
+
+    // Fonction pour créer l'effet 3D
+    function create3DEffect(container, image) {
+        let rafId = null;
+
+        container.addEventListener('mousemove', (e) => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+
+            rafId = requestAnimationFrame(() => {
+                const rect = container.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const moveX = (x - centerX) / 30;
+                const moveY = (y - centerY) / 30;
+                
+                image.style.transform = `
+                    translate3d(0, 0, 0)
+                    rotateY(${moveX}deg)
+                    rotateX(${-moveY}deg)
+                `;
+            });
+        });
+
+        container.addEventListener('mouseleave', () => {
+            if (rafId) {
+                cancelAnimationFrame(rafId);
+            }
+            image.style.transform = 'translate3d(0, 0, 0) rotateY(0) rotateX(0)';
+        });
+    }
+
+    // Appliquer l'effet aux deux images
+    create3DEffect(heroContent, heroImage);
+
+    const imageContainer = document.querySelector('.image-container');
+    const borderedImage = imageContainer.querySelector('.bordered-image');
+    create3DEffect(imageContainer, borderedImage);
 });
 
 // Fonction pour charger tous les médias
