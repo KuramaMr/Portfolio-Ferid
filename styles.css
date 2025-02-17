@@ -258,7 +258,7 @@ body, html {
     }
 }
 
-@media (max-height: 700px) and (min-width: 1025px) {
+@media (max-width: 700px) and (min-width: 1025px) {
     .profile-image-container {
         max-width: 300px;
     }
@@ -361,6 +361,7 @@ section {
   margin-bottom: 8rem;
   padding: 4rem 0;
   padding-top: 80px;
+  scroll-margin-top: 80px;
 }
 
 h2 {
@@ -423,22 +424,53 @@ h2 {
 
 .formations-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(12, 1fr);
   gap: 2rem;
   padding: 2rem 0;
+}
+
+/* Cartes courtes (CLVUL et TRE) */
+.formation-card:nth-child(1),
+.formation-card:nth-child(2) {
+  grid-column: span 6;
+}
+
+/* Cartes plus longues (Logistique, CACES, etc.) */
+.formation-card:nth-child(n+3) {
+  grid-column: span 12;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+  .formation-card:nth-child(1),
+  .formation-card:nth-child(2) {
+    grid-column: span 12;
+  }
+}
+
+@media (max-width: 768px) {
+  .formations-grid {
+    gap: 1.5rem;
+  }
+  
+  .formation-card {
+    grid-column: span 12 !important;
+  }
 }
 
 .formation-card {
   background-color: var(--light-gray);
   border-radius: 15px;
-  padding: 2rem;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 2.5rem;
+  transition: all 0.3s ease;
   border: 1px solid rgba(212, 175, 55, 0.1);
+  position: relative;
+  overflow: hidden;
 }
 
 .formation-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
 }
 
 .formation-icon {
@@ -446,6 +478,11 @@ h2 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
   text-align: center;
+  transition: transform 0.3s ease;
+}
+
+.formation-card:hover .formation-icon {
+  transform: scale(1.1);
 }
 
 .formation-card h3 {
@@ -477,13 +514,77 @@ h2 {
 }
 
 .formation-card ul ul {
-  margin-top: 0.8rem;
-  margin-left: 1rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  padding: 1rem;
+  margin-top: 1rem;
 }
 
 .formation-card ul ul li {
-  font-size: 0.9em;
-  margin-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  padding: 0.8rem 0;
+  margin: 0;
+}
+
+.formation-card ul ul li:last-child {
+  border-bottom: none;
+}
+
+.details-btn {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  background-color: var(--gold);
+  color: var(--black);
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(212, 175, 55, 0.2);
+}
+
+.details-btn.caces-r485,
+.details-btn.caces-r486 {
+  margin-left: 10px;
+}
+
+.details-btn i {
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+  background-color: var(--black);
+  color: var(--gold);
+  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+}
+
+.details-btn:hover i {
+  transform: translateX(3px);
+}
+
+.caces-r489-cat3,
+.caces-r489-cat5 {
+  align-items: center;
+}
+
+/* Style pour les sous-catégories */
+.subcategory-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.subcategory-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem;
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  margin: 0.3rem 0;
 }
 
 @media (max-width: 768px) {
@@ -649,6 +750,7 @@ h2 {
   background-color: var(--dark-gray);
   padding: 4rem;
   border-radius: 10px;
+  scroll-margin-top: 100px;
 }
 
 #contact form {
@@ -1635,4 +1737,101 @@ nav ul li a {
             0 10px 30px rgba(212, 175, 55, 0.4),
             0 -10px 30px rgba(212, 175, 55, 0.3);
     }
+}
+
+.details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+    margin-top: 0.5rem;
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    background-color: transparent;
+}
+
+.details-btn i {
+    transition: transform 0.3s ease;
+}
+
+.details-btn:hover {
+    background-color: var(--gold);
+    color: var(--black);
+    transform: translateX(5px);
+}
+
+.details-btn:hover i {
+    transform: translateX(3px);
+}
+
+.formation-card ul ul li {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.caces-r485, .caces-r486 {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    margin: 1rem 0;
+}
+
+.caces-r485 .details-btn, 
+.caces-r486 .details-btn {
+    align-self: flex-start;
+    margin-top: 0;
+}
+
+/* Ajustement du padding pour aligner avec les autres éléments */
+.formation-card ul li.caces-r485,
+.formation-card ul li.caces-r486 {
+    padding-left: 0;
+}
+
+.formation-card ul li.caces-r485::before,
+.formation-card ul li.caces-r486::before {
+    display: none;
+}
+
+.formation-card ul li.caces-r485,
+.formation-card ul li.caces-r486 {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.8rem 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+}
+
+.formation-card ul li.caces-r485:hover,
+.formation-card ul li.caces-r486:hover {
+    background-color: rgba(212, 175, 55, 0.05);
+}
+
+.formation-card ul li.caces-r485::before,
+.formation-card ul li.caces-r486::before {
+    display: none;
+}
+
+.caces-r485 .details-btn,
+.caces-r486 .details-btn {
+    margin: 0;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+/* Ajustement pour le texte */
+.caces-r485,
+.caces-r486 {
+    font-size: 1rem;
+    line-height: 1.4;
 }

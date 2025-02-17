@@ -1,30 +1,14 @@
-const scrollIndicator = document.querySelector('.scroll-indicator');
 
-window.addEventListener('scroll', () => {
-  const scrollPosition = window.scrollY;
-  const windowHeight = window.innerHeight;
-  
-  if (scrollPosition > 0) {
-    const opacity = 1 - (scrollPosition / (windowHeight * 0.5));
-    scrollIndicator.style.opacity = opacity > 0 ? opacity : 0;
-    scrollIndicator.style.visibility = opacity <= 0 ? 'hidden' : 'visible';
-  } else {
-    scrollIndicator.style.opacity = 1;
-    scrollIndicator.style.visibility = 'visible';
-  }
-});
-
+// Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
+    // Gestion du menu mobile
     const menuToggle = document.querySelector('#menu-toggle');
     const mainNav = document.querySelector('#main-nav');
     
-    console.log('Éléments du menu :', { menuToggle, mainNav });
-
     if (menuToggle && mainNav) {
         menuToggle.addEventListener('click', function(e) {
             e.preventDefault();
             e.stopPropagation();
-            console.log('Menu toggle cliqué');
             mainNav.classList.toggle('show');
             menuToggle.classList.toggle('active');
         });
@@ -42,6 +26,24 @@ document.addEventListener('DOMContentLoaded', function() {
                 mainNav.classList.remove('show');
                 menuToggle.classList.remove('active');
             }
+        });
+    }
+
+    // Gestion des liens de contact
+    const contactButton = document.querySelector('.contact-btn');
+    if (contactButton) {
+        contactButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.href = 'index.html#partenaires';
+            
+            setTimeout(() => {
+                const yOffset = -150;
+                const element = document.querySelector('#partenaires');
+                if (element) {
+                    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+                    window.scrollTo({top: y, behavior: 'smooth'});
+                }
+            }, 100);
         });
     }
 });

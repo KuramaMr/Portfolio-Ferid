@@ -3,14 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FG Formation</title>
+    <title>FeridG Formation</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="print.css" media="print">
     <link rel="icon" type="image/png" href="images/Favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
     <script>
         window.BACKEND_URL = '{{ BACKEND_URL }}';
     </script>
@@ -18,7 +17,7 @@
 <body class="loading">
     <header>
         <div id="notification-container"></div>
-        <h1><a href="#" id="top-link">FG Formation</a></h1>
+        <h1><a href="#" id="top-link">FeridG Formation</a></h1>
         <button id="menu-toggle" aria-label="Toggle menu">
             <span></span>
             <span></span>
@@ -39,7 +38,7 @@
     </header>
 
     <main>
-        <section id="hero" data-aos="fade-up">
+        <section id="hero">
             <div class="hero-content">
                 <img src="images/CarteFerid.png" alt="Guelmaoui Ferid" class="hero-image">
                 
@@ -53,7 +52,7 @@
             </div>
         </section>
 
-        <section id="presentation" data-aos="fade-up">
+        <section id="presentation">
             <h2>Présentation</h2>
             <div class="content-wrapper">
                 <div class="text-content">
@@ -80,9 +79,39 @@
             </div>
         </section>
 
-        <section id="formations" data-aos="fade-up">
+        <section id="formations">
             <h2>Mes Services</h2>
             <div class="formations-grid">
+                <!-- Carte CLVUL -->
+                <div class="formation-card">
+                    <div class="formation-icon">
+                        <i class="fas fa-truck-moving"></i>
+                    </div>
+                    <h3>Transport & Livraison</h3>
+                    <ul>
+                        <li>CLVUL (Chauffeur Livreur Véhicule Utilitaire Léger)</li>
+                        <li>Préparation aux examens</li>
+                        <li>Formation pratique et théorique</li>
+                        <li>Accompagnement personnalisé</li>
+                    </ul>
+                    <a href="#contact" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                </div>
+
+                <!-- Carte TRE -->
+                <div class="formation-card">
+                    <div class="formation-icon">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <h3>Accompagnement Professionnel</h3>
+                    <ul>
+                        <li>TRE (Technique de Recherche d'Emploi)</li>
+                        <li>Préparation aux entretiens</li>
+                        <li>Optimisation du CV</li>
+                        <li>Stratégie de recherche d'emploi</li>
+                    </ul>
+                    <a href="#contact" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                </div>
+
                 <!-- Formation en logistique -->
                 <div class="formation-card">
                     <div class="formation-icon">
@@ -107,14 +136,31 @@
                     <ul>
                         <li>R.489 : Chariots de manutention à conducteur porté
                             <ul>
-                                <li>Catégorie 1: Transpalettes à conducteur porté</li>
-                                <li>Catégorie 3: Chariots élévateurs fronteaux</li>
-                                <li>Catégorie 5: Chariots rétractables</li>
+                                <li>Catégorie 1: Transpalettes à conducteur porté
+                                    <a href="caces-r489.html" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                                </li>
+                                <li>Catégorie 3: Chariots élévateurs fronteaux
+                                    <a href="caces-r489-cat3.html" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                                </li>
+                                <li>Catégorie 5: Chariots rétractables
+                                    <a href="caces-r489-cat5.html" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                                </li>
                             </ul>
                         </li>
-                        <li>R.485: Chariots gerbeurs à conducteur accompagnant</li>
-                        <li>R.486: Plate-formes élévatrices mobiles de personnel (PEMP)</li>
-                        <li>Autorisations de conduite en entreprise</li>
+                        <li>R.485: Chariots gerbeurs à conducteur accompagnant
+                            <ul>
+                                <li>Formation complète
+                                    <a href="caces-r485.html" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>R.486: Plate-formes élévatrices mobiles de personnel (PEMP)
+                            <ul>
+                                <li>Formation complète
+                                    <a href="caces-r486.html" class="details-btn">Plus de détails <i class="fas fa-arrow-right"></i></a>
+                                </li>
+                            </ul>
+                        </li>
                     </ul>
                 </div>
 
@@ -153,15 +199,13 @@
                         <li>Programmes adaptés pour les détenus</li>
                         <li>Titre professionnel</li>
                         <li>CACES R.489</li>
-                        <li>TRE</li>
-                        <li>Titre Professionnel CLVUL</li>
                     </ul>
                 </div>
             </div>
         </section>
 
         <!-- Après la section formations -->
-        <section id="formations-futures" data-aos="fade-up">
+        <section id="formations-futures">
             <h2>Formations à venir</h2>
             <div class="formations-futures-grid">
                 <div class="formation-future-card">
@@ -193,7 +237,7 @@
             </div>
         </section>
 
-        <section id="galerie" data-aos="fade-up">
+        <section id="galerie">
             <h2>Galerie</h2>
             <div id="gallery-container">
                 <!-- Les images seront ajoutées ici dynamiquement -->
@@ -221,7 +265,7 @@
             <div id="image-list"></div>
         </div>
 
-        <section id="contact" data-aos="fade-up">
+        <section id="contact">
             <h2>Contactez-moi</h2>
             <form id="contact-form">
                 <label for="nom">Nom :</label>
@@ -239,7 +283,7 @@
         </section>
     </main>
 
-    <section id="partenaires" data-aos="fade-up">
+    <section id="partenaires">
         <h2>Mes Partenaires</h2>
         <div class="partenaires-grid">
             <div class="partenaire"><img src="images/AfpaTransparent.png" alt="Partenaire 1"></div>
@@ -254,6 +298,7 @@
             <div class="partenaire"><img src="images/Helicopt.png" alt="Partenaire 10"></div>
             <div class="partenaire"><img src="images/SMV.png" alt="Partenaire 11"></div>
             <div class="partenaire"><img src="images/centre-penitentier.png" alt="Partenaire 12"></div>
+            <div class="partenaire"><img src="images/RaymondBard.jpg" alt="Partenaire 13"></div>
         </div>
     </section>
 
@@ -276,7 +321,7 @@
     <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h4>FG Formation</h4>
+                <h4>FeridG Formation</h4>
                 <p>Auto-entrepreneur depuis 2022</p>
                 <p>SIRET : 92136416200013</p>
             </div>
@@ -293,16 +338,13 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2024 FG Formation - Tous droits réservés</p>
+            <p>&copy; 2024 FeridG Formation - Tous droits réservés</p>
         </div>
     </footer>   
     <script type="module" src="firebase.config.js"></script>
     <script type="module" src="main.js"></script>
     <script src="config.js"></script>
     <script src="script.js"></script>
-    <script>
-        AOS.init();
-    </script>
 </body>
 
 </html>
