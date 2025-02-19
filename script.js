@@ -1,4 +1,3 @@
-
 // Attendre que le DOM soit chargé
 document.addEventListener('DOMContentLoaded', function() {
     // Gestion du menu mobile
@@ -34,11 +33,13 @@ document.addEventListener('DOMContentLoaded', function() {
     if (contactButton) {
         contactButton.addEventListener('click', function(e) {
             e.preventDefault();
-            window.location.href = 'index.html#partenaires';
+            const targetHref = this.getAttribute('href');
+            window.location.href = targetHref;
             
             setTimeout(() => {
                 const yOffset = -150;
-                const element = document.querySelector('#partenaires');
+                const targetId = targetHref.split('#')[1];
+                const element = document.querySelector('#' + targetId);
                 if (element) {
                     const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
                     window.scrollTo({top: y, behavior: 'smooth'});
