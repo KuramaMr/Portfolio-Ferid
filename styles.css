@@ -525,6 +525,10 @@ h2 {
   opacity: 0.8;
 }
 
+.details-btn.fc {
+  margin-bottom: 10px;
+}
+
 .details-btn:hover {
   opacity: 1;
   transform: translateX(5px);

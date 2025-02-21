@@ -1,3 +1,180 @@
+/* Variables globales */
+:root {
+    --gold: #D4AF37;
+    --dark-gray: #1a1a1a;
+    --light-gray: #2a2a2a;
+    --white: #ffffff;
+    --black: #000000;
+    --transition: all 0.3s ease;
+    --shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+    --border: 1px solid rgba(212, 175, 55, 0.1);
+    --border-radius: 15px;
+}
+
+/* Styles communs pour toutes les sections */
+section {
+    background-color: var(--dark-gray);
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    margin: 4rem 0;
+}
+
+section h2 {
+    color: var(--gold);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+/* Style de base pour tous les conteneurs de contenu */
+.content-wrapper, .modalites-wrapper, .reglementation-wrapper, .evaluation-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de glacis universel */
+.content-wrapper::before, 
+.modalites-wrapper::before, 
+.reglementation-wrapper::before,
+.evaluation-content::before,
+.info-card::before,
+.resume-card::before,
+.modalites-card::before,
+.reglementation-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom left,
+        transparent,
+        rgba(212, 175, 55, 0.1),
+        transparent
+    );
+    transform: skewX(-15deg) translateX(200%);
+    transition: transform 1s ease;
+}
+
+/* Animation au survol universelle */
+.content-wrapper:hover::before, 
+.modalites-wrapper:hover::before, 
+.reglementation-wrapper:hover::before,
+.evaluation-content:hover::before,
+.info-card:hover::before,
+.resume-card:hover::before,
+.modalites-card:hover::before,
+.reglementation-card:hover::before {
+    transform: skewX(-15deg) translateX(-500%);
+}
+
+/* Style des cartes */
+.info-card, .resume-card, .modalites-card, .reglementation-card {
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de survol pour les cartes */
+.info-card:hover, 
+.resume-card:hover, 
+.modalites-card:hover, 
+.reglementation-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(212, 175, 55, 0.1);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+/* Style des titres dans les cartes */
+.card-header h3, .info-card h3, .modalites-card h3, .reglementation-card h3 {
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+    position: relative;
+    display: inline-block;
+}
+
+/* Style des éléments mis en évidence */
+.highlight, .important-notice {
+    color: var(--gold);
+    font-weight: 500;
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+    background: rgba(212, 175, 55, 0.05);
+    padding: 1rem;
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+}
+
+/* Grilles responsives */
+.info-grid, .resume-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+    section {
+        padding: 2rem 1rem;
+    }
+
+    section h2 {
+        font-size: 2rem;
+    }
+
+    .content-wrapper, 
+    .modalites-wrapper, 
+    .reglementation-wrapper, 
+    .evaluation-content,
+    .info-card, 
+    .resume-card, 
+    .modalites-card, 
+    .reglementation-card {
+        padding: 1.5rem;
+    }
+
+    .info-grid, .resume-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    animation: fadeIn 0.5s ease-out forwards;
+}
+
 /* Styles spécifiques pour les pages CACES */
 #formation-info {
     background-color: var(--dark-gray);
@@ -352,5 +529,175 @@
     
     .sources {
         gap: 0.8rem;
+    }
+}
+
+/* Section modalités */
+#modalites {
+    background-color: var(--dark-gray);
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    margin: 4rem 0;
+}
+
+#modalites h2 {
+    color: var(--gold);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.modalites-wrapper {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.modalites-card {
+    background-color: var(--light-gray);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+}
+
+.modalites-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.1);
+}
+
+.modalites-card h3 {
+    color: var(--gold);
+    font-size: 1.3rem;
+    margin-bottom: 1.5rem;
+    font-weight: 500;
+}
+
+.modalites-content {
+    margin-bottom: 2rem;
+}
+
+.modalites-content ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.modalites-content ul li {
+    position: relative;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.modalites-content ul li::before {
+    content: '•';
+    color: var(--gold);
+    position: absolute;
+    left: -1.5rem;
+}
+
+@media (max-width: 768px) {
+    #modalites {
+        padding: 2rem 1rem;
+    }
+    
+    .modalites-card {
+        padding: 1.5rem;
+    }
+}
+
+/* Section évaluation */
+#evaluation {
+    background-color: var(--dark-gray);
+    padding: 4rem 2rem;
+    border-radius: 10px;
+    margin: 4rem 0;
+}
+
+#evaluation h2 {
+    color: var(--gold);
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+    letter-spacing: 3px;
+    text-align: center;
+    font-weight: 400;
+    text-transform: uppercase;
+}
+
+.evaluation-content {
+    max-width: 800px;
+    margin: 0 auto;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Effet de glacis pour la section évaluation */
+.evaluation-content::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom left,
+        transparent,
+        rgba(212, 175, 55, 0.1),
+        transparent
+    );
+    transform: skewX(-15deg) translateX(200%);
+    transition: transform 1s ease;
+}
+
+.evaluation-content:hover::before {
+    transform: skewX(-15deg) translateX(-500%);
+}
+
+.evaluation-content ul {
+    list-style: none;
+    padding-left: 1.5rem;
+}
+
+.evaluation-content ul li {
+    position: relative;
+    margin-bottom: 1rem;
+    line-height: 1.5;
+    padding-left: 1.5rem;
+}
+
+.evaluation-content ul li::before {
+    content: '•';
+    color: var(--gold);
+    position: absolute;
+    left: -1rem;
+    font-size: 1.2rem;
+}
+
+.evaluation-content .highlight {
+    color: var(--gold);
+    font-weight: 500;
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid var(--gold);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    #evaluation {
+        padding: 2rem 1rem;
+    }
+    
+    #evaluation h2 {
+        font-size: 2rem;
+    }
+    
+    .evaluation-content {
+        padding: 1.5rem;
     }
 } 
