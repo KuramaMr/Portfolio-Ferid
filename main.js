@@ -124,7 +124,7 @@ function displayMedia(mediaItems) {
 
         mediaElement.innerHTML = `
             ${content}
-            <p>${item.description}</p>
+            <p class="gallery-description">${item.description}</p>
             ${auth.currentUser ? `
                 <div class="admin-controls">
                     <button class="edit-btn" title="Modifier"></button>

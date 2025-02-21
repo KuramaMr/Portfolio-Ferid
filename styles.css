@@ -423,86 +423,89 @@ h2 {
 
 .formations-grid {
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 2rem;
   padding: 2rem 0;
 }
 
-/* Cartes courtes (CLVUL et TRE) */
-.formation-card:nth-child(1),
-.formation-card:nth-child(2) {
-  grid-column: span 6;
-}
-
-/* Cartes plus longues (Logistique, CACES, etc.) */
-.formation-card:nth-child(n+3) {
-  grid-column: span 12;
-}
-
-/* Responsive */
-@media (max-width: 1200px) {
-  .formation-card:nth-child(1),
-  .formation-card:nth-child(2) {
-    grid-column: span 12;
-  }
-}
-
-@media (max-width: 768px) {
-  .formations-grid {
-    gap: 1.5rem;
-  }
-  
-  .formation-card {
-    grid-column: span 12 !important;
-  }
-}
-
 .formation-card {
-  background-color: var(--light-gray);
-  border-radius: 15px;
-  padding: 2.5rem;
-  transition: all 0.3s ease;
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(212, 175, 55, 0.1);
+  border-radius: 20px;
+  padding: 2rem;
+  transition: all 0.4s ease;
   position: relative;
   overflow: hidden;
 }
 
+.formation-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 25%;
+  height: 100%;
+  background: linear-gradient(
+      to bottom left,
+      transparent,
+      rgba(212, 175, 55, 0.1),
+      transparent
+  );
+  transform: skewX(-15deg) translateX(200%);
+  transition: transform 1s ease;
+}
+
 .formation-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 5px 20px rgba(212, 175, 55, 0.15);
+  transform: translateY(-10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+  border-color: rgba(212, 175, 55, 0.3);
+}
+
+.formation-card:hover::before {
+  transform: skewX(-15deg) translateX(-500%);
 }
 
 .formation-icon {
-  color: var(--gold);
-  font-size: 2.5rem;
+  background: rgba(212, 175, 55, 0.1);
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 1.5rem;
-  text-align: center;
-  transition: transform 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .formation-card:hover .formation-icon {
   transform: scale(1.1);
+  background: rgba(212, 175, 55, 0.2);
+}
+
+.formation-icon i {
+  color: var(--gold);
+  font-size: 1.8rem;
 }
 
 .formation-card h3 {
   color: var(--gold);
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   margin-bottom: 1.5rem;
-  text-align: center;
   font-weight: 500;
 }
 
 .formation-card ul {
   list-style: none;
   padding: 0;
-  margin: 0;
 }
 
 .formation-card ul li {
   margin-bottom: 0.8rem;
   padding-left: 1.5rem;
   position: relative;
-  line-height: 1.4;
+  color: rgba(255, 255, 255, 0.9);
 }
 
 .formation-card ul li::before {
@@ -512,97 +515,56 @@ h2 {
   left: 0;
 }
 
-.formation-card ul ul {
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 10px;
-  padding: 1rem;
-  margin-top: 1rem;
-}
-
-.formation-card ul ul li {
-  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
-  padding: 0.8rem 0;
-  margin: 0;
-}
-
-.formation-card ul ul li:last-child {
-  border-bottom: none;
-}
-
 .details-btn {
-  display: inline-flex;
-  align-items: center;
-  padding: 0.6rem 1.2rem;
-  background-color: var(--gold);
-  color: var(--black);
+  display: inline-block;
+  color: var(--gold);
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 500;
+  margin-top: 1rem;
   font-size: 0.9rem;
   transition: all 0.3s ease;
-  box-shadow: 0 2px 5px rgba(212, 175, 55, 0.2);
-}
-
-.details-btn.fc {
-  margin: 0 0 0.7rem 0;
-  font-weight: 500;
-}
-
-.details-btn.caces-r485,
-.details-btn.caces-r486 {
-  margin-left: 10px;
-}
-
-.details-btn i {
-  margin-left: 0.5rem;
-  transition: transform 0.3s ease;
+  opacity: 0.8;
 }
 
 .details-btn:hover {
-  background-color: var(--black);
-  color: var(--gold);
-  box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3);
+  opacity: 1;
+  transform: translateX(5px);
+}
+
+.details-btn i {
+  margin-left: 5px;
+  transition: transform 0.3s ease;
 }
 
 .details-btn:hover i {
   transform: translateX(3px);
 }
 
-.caces-r489-cat3,
-.caces-r489-cat5 {
-  align-items: center;
-}
-
-/* Style pour les sous-catégories */
-.subcategory-list {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.subcategory-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.8rem;
-  background-color: rgba(0, 0, 0, 0.2);
-  border-radius: 8px;
-  margin: 0.3rem 0;
-}
-
-@media (max-width: 768px) {
-  #formations {
-    padding: 2rem 1rem;
+/* Animation d'apparition des cartes */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
   }
-
-  .formations-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .formation-card {
-    padding: 1.5rem;
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
+
+.formation-card {
+  animation: fadeInUp 0.6s ease forwards;
+  opacity: 0;
+}
+
+/* Délai d'animation pour chaque carte */
+.formation-card:nth-child(1) { animation-delay: 0.1s; }
+.formation-card:nth-child(2) { animation-delay: 0.2s; }
+.formation-card:nth-child(3) { animation-delay: 0.3s; }
+.formation-card:nth-child(4) { animation-delay: 0.4s; }
+.formation-card:nth-child(5) { animation-delay: 0.5s; }
+.formation-card:nth-child(6) { animation-delay: 0.6s; }
+.formation-card:nth-child(7) { animation-delay: 0.7s; }
+.formation-card:nth-child(8) { animation-delay: 0.8s; }
 
 #gallery-container {
     display: grid;
@@ -1536,19 +1498,43 @@ nav ul li a {
 }
 
 .formation-future-card {
-    background: linear-gradient(145deg, var(--dark-gray), var(--light-gray));
-    border-radius: 15px;
+    background: rgba(18, 18, 18, 0.7);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 20px;
     padding: 2rem;
     text-align: center;
     position: relative;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border: 1px solid rgba(212, 175, 55, 0.1);
+    transition: all 0.4s ease;
     overflow: hidden;
 }
 
+.formation-future-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background: linear-gradient(
+        to bottom left,
+        transparent,
+        rgba(212, 175, 55, 0.1),
+        transparent
+    );
+    transform: skewX(-15deg) translateX(200%);
+    transition: transform 1s ease;
+}
+
 .formation-future-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 5px 15px rgba(212, 175, 55, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(212, 175, 55, 0.3);
+}
+
+.formation-future-card:hover::before {
+    transform: skewX(-15deg) translateX(-500%);
 }
 
 .nouveau-badge {
