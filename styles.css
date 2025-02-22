@@ -421,6 +421,7 @@ h2 {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: 4rem;
 }
 
 #presentation .text-content {
@@ -428,9 +429,15 @@ h2 {
   padding-right: 4rem;
 }
 
+#presentation .image-content {
+  flex: 1;
+  max-width: 500px;
+}
+
 #presentation p {
   font-size: 1.1rem;
   line-height: 1.8;
+  margin-bottom: 1.5rem;
 }
 
 #presentation .hero-image {
@@ -609,12 +616,15 @@ h2 {
 
 #gallery-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 3rem;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
     padding: 2rem 0;
+    max-width: 1400px;
+    margin: 0 auto;
 }
 
 .gallery-item {
+    width: 100%;
     display: flex;
     flex-direction: column;
     background: rgba(18, 18, 18, 0.7);
@@ -713,37 +723,58 @@ h2 {
 .gallery-item:nth-child(5) { animation-delay: 0.5s; }
 .gallery-item:nth-child(6) { animation-delay: 0.6s; }
 
+@media (max-width: 1024px) {
+    #presentation .content-wrapper {
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    #presentation .text-content {
+        padding-right: 0;
+        order: 2;
+    }
+
+    #presentation .image-content {
+        order: 1;
+        max-width: 100%;
+    }
+}
+
 @media (max-width: 768px) {
-    #galerie {
-      padding: 2rem 1rem;
-      margin: 0;
+    #presentation {
+        padding: 3rem 1.5rem;
+    }
+
+    #presentation .content-wrapper {
+        gap: 2rem;
+    }
+
+    #presentation p {
+        font-size: 1rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+    }
+
+    #presentation .hero-image {
+        height: 300px;
     }
 
     #gallery-container {
-      grid-template-columns: 1fr;
-      gap: 1.5rem;
-      padding: 1rem 0;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
 
     .gallery-item {
-      margin: 0;
-    }
-    
-    .media-container {
-      padding: 0.5rem;
+        margin: 0;
     }
 
-    #galerie .gallery-item p {
-      position: relative !important;
-      border-radius: 15px;
+    .media-container {
+        padding: 0.5rem;
     }
-    
-    .gallery-description {
-        padding: 1.2rem 1.5rem 1.5rem;
-    }
-    
-    .gallery-description p {
-        font-size: 0.9rem;
+
+    .gallery-item img,
+    .gallery-item video {
+        height: 250px;
     }
 }
 
