@@ -761,4 +761,44 @@ section {
     .evaluation-content {
         padding: 1.5rem;
     }
+}
+
+.social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+}
+
+.social-links a {
+    color: var(--gold);
+    font-size: 1.8rem;
+    padding: 1rem;
+    border-radius: 12px;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.social-links a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform: translateY(100%);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: -1;
+}
+
+.social-links a:hover {
+    color: var(--black);
+    transform: translateY(-5px);
+}
+
+.social-links a:hover::before {
+    transform: translateY(0);
+}
+
+.social-links a i {
+    position: relative;
+    z-index: 1;
 } 
