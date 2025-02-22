@@ -17,6 +17,8 @@ section {
     padding: 4rem 2rem;
     border-radius: 10px;
     margin: 4rem 0;
+    scroll-margin-top: 120px;
+    padding-top: 120px;
 }
 
 section h2 {
@@ -41,6 +43,7 @@ section h2 {
     padding: 2rem;
     position: relative;
     overflow: hidden;
+    margin-top: 2rem;
 }
 
 /* Effet de glacis universel */
@@ -134,28 +137,75 @@ section h2 {
 }
 
 /* Media Queries */
-@media (max-width: 768px) {
-    section {
-        padding: 2rem 1rem;
+@media (max-width: 1024px) {  /* Tablettes et mobiles */
+    /* Désactivation de l'effet de glacis */
+    .content-wrapper::before, 
+    .modalites-wrapper::before, 
+    .reglementation-wrapper::before,
+    .evaluation-content::before,
+    .info-card::before,
+    .resume-card::before,
+    .modalites-card::before,
+    .reglementation-card::before {
+        display: none;  /* Supprime complètement l'effet */
     }
 
     section h2 {
-        font-size: 2rem;
+        font-size: 1.8rem;
+        letter-spacing: 2px;
+        padding: 0 1rem;
+        word-wrap: break-word;
+    }
+
+    section,
+    #formation-info {
+        scroll-margin-top: 100px;
+        padding-top: 100px;
     }
 
     .content-wrapper, 
     .modalites-wrapper, 
     .reglementation-wrapper, 
     .evaluation-content,
-    .info-card, 
-    .resume-card, 
-    .modalites-card, 
+    .info-card,
+    .resume-card,
+    .modalites-card,
     .reglementation-card {
         padding: 1.5rem;
+        /* Simplification de l'animation au hover */
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .info-grid, .resume-grid {
-        grid-template-columns: 1fr;
+    /* Version simplifiée de l'effet hover */
+    .content-wrapper:hover, 
+    .modalites-wrapper:hover, 
+    .reglementation-wrapper:hover,
+    .evaluation-content:hover,
+    .info-card:hover,
+    .resume-card:hover,
+    .modalites-card:hover,
+    .reglementation-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+}
+
+/* Pour les très petits écrans */
+@media (max-width: 480px) {
+    section h2 {
+        font-size: 1.5rem;
+    }
+
+    .info-grid,
+    .resume-grid,
+    .modalites-grid {
+        gap: 1rem;
+    }
+
+    section,
+    #formation-info {
+        scroll-margin-top: 80px;
+        padding-top: 80px;
     }
 }
 
@@ -179,6 +229,8 @@ section {
 #formation-info {
     text-align: center;
     padding: 4rem 2rem;
+    scroll-margin-top: 120px;
+    padding-top: 120px;
 }
 
 #formation-info h2 {
@@ -234,8 +286,11 @@ section {
 
 /* Media Queries */
 @media (max-width: 768px) {
+    section,
     #formation-info {
-        padding: 2rem 1rem;
+        scroll-margin-top: 90px;
+        padding-top: 90px;
+        margin-top: 0;
     }
 
     #formation-info h2 {
@@ -425,6 +480,12 @@ section {
 
 /* Media Queries */
 @media (max-width: 768px) {
+
+    #formation-info {
+        padding-top: 200px !important;
+        scroll-margin-top: 200px !important;
+    }
+
     .info-grid, .resume-grid {
         grid-template-columns: 1fr;
     }

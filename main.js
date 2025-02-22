@@ -123,13 +123,17 @@ function displayMedia(mediaItems) {
             : `<img src="${item.url}" alt="${item.description}">`;
 
         mediaElement.innerHTML = `
-            ${content}
-            <p class="gallery-description">${item.description}</p>
-            ${auth.currentUser ? `
-                <div class="admin-controls">
-                    <button class="edit-btn" title="Modifier"></button>
-                    <button class="delete-btn" title="Supprimer"></button>
-                </div>
+            <div class="media-container">
+                ${content}
+            </div>
+            <div class="gallery-description">
+                <p>${item.description}</p>
+            </div>
+                ${auth.currentUser ? `
+                    <div class="admin-controls">
+                        <button class="edit-btn" title="Modifier"></button>
+                        <button class="delete-btn" title="Supprimer"></button>
+                    </div>
             ` : ''}
         `;
 
@@ -235,13 +239,12 @@ function setupEventListeners() {
     // Gestion du formulaire d'upload
     const uploadForm = document.getElementById('upload-form');
     const fileInput = document.getElementById('media-upload');
-    const mediaType = document.getElementById('media-type');
     const fileNameDisplay = document.getElementById('selected-file-name');
     
     uploadForm?.addEventListener('submit', async (e) => {
         e.preventDefault();
         const file = fileInput.files[0];
-        const type = mediaType.value;
+        const type = document.getElementById('media-type').value;
         const description = document.getElementById('media-description').value;
 
         try {
@@ -264,8 +267,15 @@ function setupEventListeners() {
     });
 
     fileInput.addEventListener('change', (e) => {
-        const fileName = e.target.files[0]?.name;
-        fileNameDisplay.textContent = fileName ? `Fichier sélectionné : ${fileName}` : '';
+        const file = e.target.files[0];
+        if (file) {
+            fileNameDisplay.textContent = `Fichier sélectionné : ${file.name}`;
+            // Détection automatique du type de média
+            const isVideo = file.type.startsWith('video/');
+            document.getElementById('media-type').value = isVideo ? 'video' : 'image';
+        } else {
+            fileNameDisplay.textContent = '';
+        }
     });
 
     // Gestion des clics sur la galerie (édition et suppression)

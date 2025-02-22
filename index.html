@@ -249,7 +249,7 @@
             <h2>Formations à venir</h2>
             <div class="formations-futures-grid">
                 <div class="formation-future-card">
-                    <div class="nouveau-badge">Nouveau</div>
+                    <div class="nouveau-badge">Bientôt</div>
                     <div class="formation-icon">
                         <i class="fas fa-truck"></i>
                     </div>
@@ -258,7 +258,7 @@
                 </div>
 
                 <div class="formation-future-card">
-                    <div class="nouveau-badge">Nouveau</div>
+                    <div class="nouveau-badge">Bientôt</div>
                     <div class="formation-icon">
                         <i class="fas fa-dolly"></i>
                     </div>
@@ -267,7 +267,7 @@
                 </div>
 
                 <div class="formation-future-card">
-                    <div class="nouveau-badge">Nouveau</div>
+                    <div class="nouveau-badge">Bientôt</div>
                     <div class="formation-icon">
                         <i class="fas fa-first-aid"></i>
                     </div>
@@ -285,20 +285,19 @@
         </section>
 
         <div id="image-management" style="display: none;">
-        <h2>Gestion des images</h2>
+        <h2>Gestion de la galerie</h2>
         <div id="admin-panel">
-            <h3>Ajouter une nouvelle image</h3>
+            <h3>Ajouter une nouvelle image/vidéo</h3>
             <form id="upload-form">
                 <div class="file-input-wrapper">
                     <input type="file" id="media-upload" name="media" accept="image/*,video/*" required>
-                    <label for="media-upload" class="custom-file-upload">Choisir un fichier (image ou vidéo)</label>
+                    <label for="media-upload" class="custom-file-upload">
+                        Glissez votre fichier ici ou cliquez pour sélectionner
+                    </label>
                     <div id="selected-file-name"></div>
                 </div>
-                <select id="media-type" name="mediaType">
-                    <option value="image">Image</option>
-                    <option value="video">Vidéo</option>
-                </select>
-                <input type="text" id="media-description" name="description" placeholder="Description du média">
+                <input type="hidden" id="media-type" name="mediaType" value="image">
+                <input type="text" id="media-description" name="description" placeholder="Description du média" required>
                 <button type="submit">Uploader</button>
             </form>
         </div>
