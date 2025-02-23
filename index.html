@@ -1,35 +1,80 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <!-- Balises META de base -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="FeridG Formation - Centre de formation CACES® et formations professionnelles à Saint-Étienne-au-Temple, près de Châlons-en-Champagne. Spécialiste en formation cariste, nacelle, et magasinier.">
-    <meta name="keywords" content="formation CACES, formation cariste, formation nacelle, formation magasinier, Châlons-en-Champagne, Saint-Étienne-au-Temple, Marne, Grand Est, PEMP, chariot élévateur">
-    <title>FeridG Formation - Formation CACES® et Professionnelle à Saint-Étienne-au-Temple</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     
-    <!-- Open Graph pour les réseaux sociaux -->
-    <meta property="og:title" content="FeridG Formation - Formation CACES® et Professionnelle">
-    <meta property="og:description" content="Centre de formation spécialisé en CACES® et formations professionnelles à Saint-Étienne-au-Temple, près de Châlons-en-Champagne">
-    <meta property="og:image" content="https://feridg-formation.com/images/Favicon.png">
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="FeridG Formation - Centre de formation professionnelle spécialisé en CACES®, logistique et sécurité. Formations cariste, nacelle, préparateur de commandes, magasinier et habilitation électrique à Saint-Étienne-au-Temple, près de Châlons-en-Champagne.">
+    <meta name="keywords" content="formation CACES, formation cariste, formation nacelle, formation logistique, formation magasinier, préparateur de commandes, habilitation électrique, PEMP, chariot élévateur, Saint-Étienne-au-Temple, Châlons-en-Champagne, Marne, Grand Est">
+    <meta name="author" content="FeridG Formation">
+    <meta name="robots" content="index, follow, max-image-preview:large">
+    <meta name="language" content="fr">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:site_name" content="FeridG Formation">
+    <meta property="og:title" content="FeridG Formation - Centre de Formation CACES® et Professionnelle">
+    <meta property="og:description" content="Formation CACES®, logistique et sécurité. Expert en formation cariste, nacelle et préparateur de commandes près de Châlons-en-Champagne.">
+    <meta property="og:image" content="https://feridg-formation.com/images/logo.png">
     <meta property="og:url" content="https://feridg-formation.com">
+    <meta property="og:locale" content="fr_FR">
     
-    <!-- Balises spécifiques pour la localisation -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@feridgformation">
+    <meta name="twitter:title" content="FeridG Formation - Formation Professionnelle">
+    <meta name="twitter:description" content="Centre de formation spécialisé en CACES® et formations professionnelles dans la Marne.">
+    <meta name="twitter:image" content="https://feridg-formation.com/images/logo.png">
+    
+    <!-- Géolocalisation -->
     <meta name="geo.region" content="FR-GES">
     <meta name="geo.placename" content="Saint-Étienne-au-Temple">
     <meta name="geo.position" content="48.9667;4.4333">
+    <meta name="ICBM" content="48.9667, 4.4333">
+    
+    <!-- Autres balises importantes -->
+    <link rel="canonical" href="https://feridg-formation.com">
+    <link rel="icon" type="image/png" href="images/Favicon.png">
+    <link rel="apple-touch-icon" href="images/logo-apple-touch.png">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "EducationalOrganization",
+        "name": "FeridG Formation",
+        "description": "Centre de formation professionnelle spécialisé en CACES® et formations logistiques",
+        "url": "https://feridg-formation.com",
+        "logo": "https://feridg-formation.com/images/logo.png",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Saint-Étienne-au-Temple",
+            "addressLocality": "Châlons-en-Champagne",
+            "postalCode": "51460",
+            "addressRegion": "Grand Est",
+            "addressCountry": "FR"
+        },
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+33674095824",
+            "contactType": "customer service",
+            "email": "feridgformation@gmail.com"
+        }
+    }
+    </script>
+    
+    <title>FeridG Formation - Formation CACES® et Professionnelle à Saint-Étienne-au-Temple</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="print.css" media="print">
-    <link rel="icon" type="image/png" href="images/Favicon.png">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" />
     <script>
         window.BACKEND_URL = '{{ BACKEND_URL }}';
     </script>
-    
-    <!-- Twitter Card avec le logo -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:image" content="https://feridg-formation.com/images/Favicon.png">
 </head>
 
 <body class="loading">
