@@ -1,0 +1,30 @@
+# www.robotstxt.org/
+# Autorise tous les robots d'indexation
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://feridg-formation.com/sitemap.xml
+
+# Interdire l'accès aux dossiers privés
+Disallow: /cgi-bin/
+Disallow: /tmp/
+Disallow: /admin/
+Disallow: /includes/
+
+# Règles spécifiques pour Googlebot
+User-agent: Googlebot
+Allow: /
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Règles spécifiques pour Bingbot
+User-agent: Bingbot
+Allow: /
+Allow: /images/
+Allow: /css/
+Allow: /js/
+
+# Temps d'attente entre les requêtes
+Crawl-delay: 10 
