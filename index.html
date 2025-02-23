@@ -85,11 +85,14 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "EducationalOrganization",
+        "@type": "LocalBusiness",
         "name": "FeridG Formation",
-        "description": "Centre de formation professionnelle spécialisé en CACES® et formations logistiques",
+        "image": "https://feridg-formation.com/images/logo.png",
+        "description": "Centre de formation CACES® et formations professionnelles. Spécialiste en formation cariste, nacelle, et logistique près de Châlons-en-Champagne",
+        "@id": "https://feridg-formation.com",
         "url": "https://feridg-formation.com",
-        "logo": "https://feridg-formation.com/images/logo.png",
+        "telephone": "+33674095824",
+        "priceRange": "€€",
         "address": {
             "@type": "PostalAddress",
             "streetAddress": "Saint-Étienne-au-Temple",
@@ -98,11 +101,59 @@
             "addressRegion": "Grand Est",
             "addressCountry": "FR"
         },
-        "contactPoint": {
-            "@type": "ContactPoint",
-            "telephone": "+33674095824",
-            "contactType": "customer service",
-            "email": "feridgformation@gmail.com"
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 48.9667,
+            "longitude": 4.4333
+        },
+        "areaServed": ["France", "Grand Est", "Marne", "Châlons-en-Champagne"],
+        "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Formations CACES et Professionnelles",
+            "itemListElement": [
+                {
+                    "@type": "Offer",
+                    "name": "CACES R489",
+                    "description": "Formation CACES® chariot élévateur"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "CACES R486",
+                    "description": "Formation CACES® nacelle (PEMP)"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "CACES R485",
+                    "description": "Formation CACES® chariot gerbeur"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "H0B0",
+                    "description": "Habilitation électrique"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Accompagnement Professionnel",
+                    "description": "Accompagnement dans la recherche d'emploi"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Formation Transport",
+                    "description": "Formation Transport"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Formation en logistique",
+                    "description": "Formation en logistique"
+                },
+                {
+                    "@type": "Offer",
+                    "name": "Formation en préparation de commande, emballage et expédition",
+                    "description": "Formation en préparation de commande, emballage et expédition"
+                }
+                
+            ]
+            ]
         }
     }
     </script>
@@ -122,6 +173,8 @@
             document.write('<script src="https://cdnjs.cloudflare.com/ajax/libs/core-js/2.6.11/core.min.js"><\/script>');
         }
     </script>
+    <meta name="revisit-after" content="7 days">
+    <link rel="alternate" hreflang="fr-fr" href="https://feridg-formation.com">
 </head>
 
 <body class="loading">
